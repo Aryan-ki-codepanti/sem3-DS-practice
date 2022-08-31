@@ -1,17 +1,23 @@
 #include <iostream>
-#define MAX_SIZE 10
 #define GARBAGE -9999
 using namespace std;
 
 class Queue
 {
-    int arr[MAX_SIZE];
+    int *arr;
+    int size;
     int front = -1, back = -1;
 
 public:
+    Queue(int s)
+    {
+        size = s;
+        arr = new int[s];
+    }
+
     bool isFull()
     {
-        return back == MAX_SIZE - 1;
+        return back == size - 1;
     }
 
     bool isEmpty()
@@ -57,8 +63,12 @@ public:
 
 int main()
 {
-    Queue q;
-    int element , choice;
+    int n;
+    cout << "Enter max size of queue : ";
+    cin >> n;
+
+    Queue q(n);
+    int element, choice;
 
     while (true)
     {
@@ -68,14 +78,13 @@ int main()
         cout << "3.Display" << endl;
         cout << "4.Exit" << endl;
         cout << "Enter your choice : ";
-        cin >> choice; 
+        cin >> choice;
 
-        if(choice == 4)
+        if (choice == 4)
         {
             cout << "Exiting program" << endl;
             break;
         }
-
 
         switch (choice)
         {
@@ -87,12 +96,12 @@ int main()
 
         case 2:
             element = q.dequeue();
-            if(element == GARBAGE)
+            if (element == GARBAGE)
                 cout << "UNDERFLOW" << endl;
             else
                 cout << "DEQUEUED : " << element << endl;
             break;
-        
+
         case 3:
             q.display();
             break;
@@ -101,10 +110,7 @@ int main()
             cout << "Make a valid choice" << endl;
             break;
         }
-
-
     }
-    
 
     return 0;
 }
