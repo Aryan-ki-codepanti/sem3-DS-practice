@@ -65,9 +65,6 @@ void addTwoLarge(string s1, string s2)
     int n1 = s1.length();
     int n2 = s2.length();
 
-    int tmp_int;
-    string tmp_str;
-
     Stack stack1(n1);
     Stack stack2(n2);
     Stack stack_res(n1 + n2);
