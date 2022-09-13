@@ -143,6 +143,6 @@ int main()
     cout << "Enter infix" << endl;
     cin >> s;
     cout << "Postfix : " << infixToPostfix(s) << endl;
-    cout << "Value: " << evaluatePostfix(infixToPostfix(s) ) << endl;
+    cout << "Value: " << evaluatePostfix(infixToPostfix(s)) << endl;
     return 0;
 }
