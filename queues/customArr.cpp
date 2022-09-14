@@ -45,6 +45,12 @@ public:
         return arr[front];
     }
 
+    void clear()
+    {
+        front = -1;
+        back = -1;
+    }
+
     void display()
     {
 
