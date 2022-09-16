@@ -96,6 +96,47 @@ public:
 
 int main()
 {
-    
+    int n, x, choice;
+    cout << "Enter max capacity of queue : ";
+    cin >> n;
+    CircularQueue queue(n);
+
+    while (true)
+    {
+        cout << "-----Queue Menu-------" << endl;
+        cout << "1. Enqueue" << endl;
+        cout << "2. Dequeue" << endl;
+        cout << "3. Display" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Make a choice : ";
+        cin >> choice;
+
+        if (choice == 4)
+        {
+            cout << "Exiting program" << endl;
+            break;
+        }
+
+        switch (choice)
+        {
+        case 1:
+            cout << "Enter element to be enqueued : ";
+            cin >> x;
+            queue.enqueue(x);
+            break;
+        case 2:
+            x = queue.dequeue();
+            cout << "Dequeued : " << x << endl;
+            break;
+        case 3:
+            queue.display();
+            break;
+
+        default:
+            cout << "Make a valid choice" << endl;
+            break;
+        }
+    }
+
     return 0;
 }
