@@ -25,6 +25,21 @@ public:
         head = tail = NULL;
     }
 
+    void addOnTail(int a)
+    {
+        Node *newNode = new Node(a);
+        // case 1 : first insertion
+        if (head == NULL && tail == NULL)
+        {
+            head = tail = NULL;
+            return;
+        }
+
+        // case 2 : other
+        tail->next = newNode;
+        tail = newNode;
+    }
+
     void addOnHead(int a)
     {
         Node *newNode = new Node(a);
@@ -58,42 +73,6 @@ public:
         }
         cout << "NULL" << endl;
     }
-
-    int largestElement()
-    {
-        // empty LL
-        if (head == NULL)
-            return GARBAGE;
-
-        Node *ptr = head;
-        int largest = ptr->data;
-
-        while (ptr != NULL)
-        {
-            if (largest < ptr->data)
-                largest = ptr->data;
-            ptr = ptr->next;
-        }
-        return largest;
-    }
-
-    void oddElements()
-    {
-        if (head == NULL)
-        {
-            cout << "Empty List" << endl;
-            return;
-        }
-        cout << "Odds : ";
-        Node *ptr = head;
-        while (ptr != NULL)
-        {
-            if (ptr->data % 2 != 0)
-                cout << ptr->data << " ";
-            ptr = ptr->next;
-        }
-        cout << endl;
-    }
 };
 
 int main()
@@ -102,8 +81,8 @@ int main()
     ll.addOnHead(3);
     ll.addOnHead(4);
     ll.addOnHead(5);
+    ll.addOnTail(6);
+    ll.addOnTail(7);
     ll.display();
-    cout << "Largest : " << ll.largestElement() << endl;
-    ll.oddElements();
     return 0;
 }
