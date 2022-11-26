@@ -31,7 +31,7 @@ public:
         // case 1 : first insertion
         if (head == NULL && tail == NULL)
         {
-            head = tail = NULL;
+            head = tail = newNode;
             return;
         }
 
@@ -55,6 +55,59 @@ public:
 
         newNode->next = head;
         head = newNode;
+    }
+
+    void deleteHead()
+    {
+        // Case 1 : Empty Linked List
+        if (head == NULL && tail == NULL)
+        {
+            cout << "Can't delete head from empty list" << endl;
+            return;
+        }
+
+        Node *delNode;
+        // Case 2 : one node in  linked list
+        delNode = head;
+        if (head == tail)
+        {
+            head = tail = NULL;
+            delete delNode;
+            return;
+        }
+
+        // Case 3 : Other
+        head = head->next;
+        delete delNode;
+    }
+
+    void deleteTail()
+    {
+        // Case 1 : Empty Linked List
+        if (head == NULL && tail == NULL)
+        {
+            cout << "Can't delete tail from empty list" << endl;
+            return;
+        }
+
+        Node *delNode;
+        // Case 2 : one node in  linked list
+        delNode = tail;
+        if (head == tail)
+        {
+            head = tail = NULL;
+            delete delNode;
+            return;
+        }
+
+        // Case 3 : Other
+        Node *current = head;
+        while (current->next != tail)
+            current = current->next;
+
+        current->next = NULL;
+        tail = current;
+        delete delNode;
     }
 
     void display()
@@ -83,6 +136,16 @@ int main()
     ll.addOnHead(5);
     ll.addOnTail(6);
     ll.addOnTail(7);
+    ll.display();
+
+    ll.deleteTail();
+    ll.display();
+    ll.deleteTail();
+    ll.display();
+    ll.deleteTail();
+    ll.display();
+    ll.deleteTail();
+    ll.deleteTail();
     ll.display();
     return 0;
 }
