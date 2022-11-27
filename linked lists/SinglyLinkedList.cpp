@@ -25,6 +25,20 @@ public:
         head = tail = NULL;
     }
 
+    int linearSearch(int a)
+    {
+        Node *ptr = head;
+        int idx = 0;
+        while (ptr != NULL)
+        {
+            if (ptr->data == a)
+                return idx;
+            ptr = ptr->next;
+            idx++;
+        }
+        return -1;
+    }
+
     void addOnTail(int a)
     {
         Node *newNode = new Node(a);
@@ -110,6 +124,39 @@ public:
         delete delNode;
     }
 
+    void deleteByVal(int a)
+    {
+        // Case 1 : a not in linked list
+        if (linearSearch(a) == -1)
+        {
+            cout << a << " not found hence can not be deleted" << endl;
+            return;
+        }
+
+        // Case 2 : head has value a
+        if (head->data == a)
+        {
+            deleteHead();
+            return;
+        }
+
+        // Case 3 : tail has value a
+        if (tail->data == a)
+        {
+            deleteTail();
+            return;
+        }
+
+        // Case 4 : in between
+        Node *ptr = head;
+        while (ptr->next->data != a)
+            ptr = ptr->next;
+
+        Node *delNode = ptr->next;
+        ptr->next = delNode->next;
+        delete delNode;
+    }
+
     void display()
     {
         if (head == NULL)
@@ -138,14 +185,12 @@ int main()
     ll.addOnTail(7);
     ll.display();
 
-    ll.deleteTail();
+    ll.deleteByVal(3);
     ll.display();
-    ll.deleteTail();
+    ll.deleteByVal(5);
     ll.display();
-    ll.deleteTail();
+    ll.deleteByVal(7);
     ll.display();
-    ll.deleteTail();
-    ll.deleteTail();
-    ll.display();
+
     return 0;
 }
