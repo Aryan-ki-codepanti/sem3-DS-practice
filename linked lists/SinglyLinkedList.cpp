@@ -71,6 +71,41 @@ public:
         head = newNode;
     }
 
+    void addOnIdx(int idx, int a)
+    {
+        if (head == NULL && tail == NULL)
+        {
+            cout << "Can't update index " << idx << " in empty linked list" << endl;
+            return;
+        }
+
+        if (idx == 0)
+        {
+            addOnHead(a);
+            return;
+        }
+
+        Node *ptr = head;
+        for (int i = 0; i < idx - 1 && ptr->next != NULL; i++)
+            ptr = ptr->next;
+
+        if (ptr->next == NULL)
+        {
+            cout << "Can't update index " << idx << " in shorter linked list" << endl;
+            return;
+        }
+
+        if (ptr->next == tail)
+        {
+            addOnTail(a);
+            return;
+        }
+
+        Node *newNode = new Node(a);
+        newNode->next = ptr->next;
+        ptr->next = newNode;
+    }
+
     void deleteHead()
     {
         // Case 1 : Empty Linked List
@@ -185,12 +220,16 @@ int main()
     ll.addOnTail(7);
     ll.display();
 
-    ll.deleteByVal(3);
+    ll.addOnIdx(2, 8);
     ll.display();
-    ll.deleteByVal(5);
+    ll.addOnIdx(0, 9);
     ll.display();
-    ll.deleteByVal(7);
+    ll.addOnIdx(12, 9);
+    ll.display();
+    ll.addOnIdx(6, 9);
     ll.display();
 
+    ll.addOnTail(4);
+    ll.display();
     return 0;
 }
