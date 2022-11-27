@@ -73,34 +73,41 @@ public:
 
     void addOnIdx(int idx, int a)
     {
+
+        // Case 1: empty linked list
         if (head == NULL && tail == NULL)
         {
             cout << "Can't update index " << idx << " in empty linked list" << endl;
             return;
         }
 
+        // Case 2 : idx 0 ie at head
         if (idx == 0)
         {
             addOnHead(a);
             return;
         }
 
+        // moving to ptr at idx -  1 pos while not goin out of bounds
         Node *ptr = head;
         for (int i = 0; i < idx - 1 && ptr->next != NULL; i++)
             ptr = ptr->next;
 
+        // Case 3: idx not exist in linked list (idx >= size of linked list)
         if (ptr->next == NULL)
         {
             cout << "Can't update index " << idx << " in shorter linked list" << endl;
             return;
         }
 
+        // Case 4: insertion is at tail (idx = size - 1 )
         if (ptr->next == tail)
         {
             addOnTail(a);
             return;
         }
 
+        // Case 5: general case
         Node *newNode = new Node(a);
         newNode->next = ptr->next;
         ptr->next = newNode;
