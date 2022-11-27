@@ -25,7 +25,7 @@ public:
         head = tail = NULL;
     }
 
-    int linearSearch(int a)
+    int linearSearch(int a) // returns idx of a
     {
         Node *ptr = head;
         int idx = 0;
