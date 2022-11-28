@@ -73,7 +73,6 @@ public:
 
     void addOnIdx(int idx, int a)
     {
-
         // Case 1: empty linked list
         if (head == NULL && tail == NULL)
         {
@@ -168,7 +167,7 @@ public:
 
     void deleteByVal(int a)
     {
-        // Case 1 : a not in linked list
+        // Case 1 : a not in linked list or empty ll
         if (linearSearch(a) == -1)
         {
             cout << a << " not found hence can not be deleted" << endl;
@@ -194,6 +193,46 @@ public:
         while (ptr->next->data != a)
             ptr = ptr->next;
 
+        Node *delNode = ptr->next;
+        ptr->next = delNode->next;
+        delete delNode;
+    }
+
+    void deleteAtIdx(int idx)
+    {
+        // Case 1 : Empty linked list
+        if (head == NULL && tail == NULL)
+        {
+            cout << "Can't remove idx from Emtpy linked list" << endl;
+            return;
+        }
+
+        // Case 2 : Removal at head
+        if (idx == 0)
+        {
+            deleteHead();
+            return;
+        }
+
+        Node *ptr = head;
+        for (int i = 0; i < idx - 1 && ptr->next != NULL; i++)
+            ptr = ptr->next;
+
+        // Case 3 : idx out of bounds
+        if (ptr->next == NULL)
+        {
+            cout << "Index out of bounds" << endl;
+            return;
+        }
+
+        // Case 4 : Deletion at tail
+        if (ptr->next == tail)
+        {
+            deleteTail();
+            return;
+        }
+
+        // Case 5 : General
         Node *delNode = ptr->next;
         ptr->next = delNode->next;
         delete delNode;
@@ -227,16 +266,13 @@ int main()
     ll.addOnTail(7);
     ll.display();
 
-    ll.addOnIdx(2, 8);
+    ll.deleteAtIdx(6);
     ll.display();
-    ll.addOnIdx(0, 9);
+    ll.deleteAtIdx(0);
     ll.display();
-    ll.addOnIdx(12, 9);
+    ll.deleteAtIdx(4);
     ll.display();
-    ll.addOnIdx(6, 9);
-    ll.display();
-
-    ll.addOnTail(4);
+    ll.deleteAtIdx(2);
     ll.display();
     return 0;
 }
